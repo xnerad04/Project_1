@@ -1,0 +1,7 @@
+https://digilent.com/reference/_media/reference/pmod/pmodclp/pmodclp_rm.pdf
+
+https://digilent.com/reference/pmod/pmodclp/start?redirect=1
+
+https://lastminuteengineers.com/rotary-encoder-arduino-tutorial/
+
+https://components101.com/modules/joystick-module
