@@ -52,5 +52,7 @@ Insert a link to a short video with your practical implementation example (1-3 m
 
 ## References
 
-1. Write your text here.
-2. ...
+1. https://digilent.com/reference/_media/reference/pmod/pmodclp/pmodclp_rm.pdf
+2. https://digilent.com/reference/pmod/pmodclp/start?redirect=1
+3. https://lastminuteengineers.com/rotary-encoder-arduino-tutorial/
+4. https://components101.com/modules/joystick-module
