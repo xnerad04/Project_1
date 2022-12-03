@@ -20,6 +20,10 @@ For our application, we use three components properly connected to the Arduino U
 ### LCD Digilent Pmod
 ![pmodclp-arduinouno_bb_gmplcfqZqg](https://user-images.githubusercontent.com/99417291/205458621-2fdcf0f4-b484-4f0c-83ce-bfd333b01045.png)
 
+To connect all components to the right pins, we use breadboard. Final connection with all necessary components connected to the Arduino board is on the picture bellow.
+![complete connection](https://user-images.githubusercontent.com/99417291/205458941-f0b1735d-0ad1-4454-a5d3-f12c880d6b9c.jpg)
+
+
 ## Software description
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
