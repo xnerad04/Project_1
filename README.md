@@ -1,4 +1,4 @@
-# Project 1
+# Project - Selective timer
 
 Application of analog joy-stick (2 ADC channels, 1 push button), rotary encoder, and Digilent PmodCLP LCD module.
 
@@ -46,9 +46,10 @@ To connect all components to the right pins, we use breadboard. Final connection
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 
-## Video
+## Foto
 
-Insert a link to a short video with your practical implementation example (1-3 minutes, e.g. on YouTube).
+![IMG_20221129_141155](https://user-images.githubusercontent.com/99417291/205460198-f538b051-a9f5-404d-ad78-56174f36f3a9.jpg)
+
 
 ## References
 
