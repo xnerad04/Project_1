@@ -32,14 +32,9 @@ int main(void)
 {
     // Initialize display
     lcd_init(LCD_DISP_ON);
-    lcd_gotoxy(0, 0); lcd_puts("Timer:");
+    lcd_gotoxy(0, 0); lcd_puts("Counter:");
     lcd_gotoxy(0, 1); lcd_puts("Project_1");
-    lcd_gotoxy(7, 0); lcd_puts("00");  // Put ADC value in decimal
-    lcd_gotoxy(9, 0); lcd_puts(":");
-    lcd_gotoxy(10,0); lcd_puts("00");  // Put ADC value in hexadecimal
-    lcd_gotoxy(12, 0); lcd_puts(":");
-    lcd_gotoxy(13,0); lcd_puts("0");
-    lcd_gotoxy(7,0);
+    lcd_gotoxy(9, 0); lcd_puts("0000");
 
     // Configure Analog-to-Digital Convertion unit
     // Select ADC voltage reference to "AVcc with external capacitor at AREF pin"
@@ -92,11 +87,16 @@ ISR(TIMER1_OVF_vect)
 ISR(ADC_vect)
 {
     static uint8_t no_of_overflows = 0;
-    static uint8_t tenths = 0;  // Tenths of a second
-    static uint8_t secs = 0;    // Seconds
-    static uint8_t mins = 0;;   // Minutes
+    static uint8_t ones = 0;  // Tenths of a second
+    static uint8_t tens = 0;    // Seconds
+    static uint8_t hunds = 0;    // Minutes
+    static uint8_t thous = 0;
     char string[2];             // String for converted numbers by itoa()
-    static uint8_t value = 1000;
+    uint16_t value = 0;
+    /*uint16_t xval = 0;*/
+
+    value = ADC;
+
 
     no_of_overflows++;
     if (no_of_overflows >= 6)
@@ -104,121 +104,113 @@ ISR(ADC_vect)
         // Do this every 6 x 16 ms = 100 ms
         no_of_overflows = 0;
 
-        if (value >= 1000)
+        if (value <= 300)
         {
 
             // Count tenth of seconds 0, 1, ..., 9, 0, 1, ...
-            tenths++;
-            if (tenths > 9)
+            ones++;
+            if (ones > 9)
             {
-                tenths = 0;
+                ones = 0;
                 // Add seconds to stopwatch
-                secs++;
-                if (secs > 59)
+                tens++;
+                if (tens > 9)
                 {
-                    secs = 0;
-                    mins++;
+                    tens = 0;
+                    hunds++;
 
-                    if (mins > 59)
+                    if (hunds > 9)
                     {
-                        mins = 0;
+                        hunds = 0;
+                        thous++;
                     }
 
-                    itoa(mins, string, 10);
-                    lcd_gotoxy(7, 0);
-                    if (mins < 10)
-                        lcd_puts('0');
-                    lcd_puts(string);
-
                 }
-                // Display seconds
-                itoa(secs, string, 10);
-                lcd_gotoxy(10, 0);
-                if (secs < 10)
-                    lcd_putc('0');
-                lcd_puts(string);
+
             }
-            // Show tenths of a second on LCD screen
-            itoa(tenths, string, 10);  // Convert decimal value to string
-            // Display "00:00.tenths"
-            lcd_gotoxy(13, 0);
-            lcd_puts(string);
+
         }
 
-        if (value <= 5)
+        else if (value >= 700)
         {
+            ones--;
 
-            // Count tenth of seconds 0, 1, ..., 9, 0, 1, ...
-            tenths--;
-            if (tenths == 0)
+            if (ones > 200)
             {
-                tenths = 9;
-                // Add seconds to stopwatch
-                secs--;
-                if (secs == 0)
-                {
-                    secs = 59;
-                    mins--;
+                ones = 9;
+                tens--;
 
-                    if (mins == 0)
+                if (tens > 200)
+                {
+                    tens = 9;
+                    hunds--;
+
+                    if (hunds > 200)
                     {
-                        mins = 0;
+                        hunds = 9;
+                        thous--;
+
+                        if(thous > 200)
+                        {
+                            thous = 0;
+                            hunds = 0;
+                            tens = 0;
+                            ones = 0;
+                        }
                     }
 
-                    itoa(mins, string, 10);
-                    lcd_gotoxy(7, 0);
-                    if (mins < 10)
-                        lcd_puts('0');
-                    lcd_puts(string);
-
                 }
-                // Display seconds
-                itoa(secs, string, 10);
-                lcd_gotoxy(10, 0);
-                if (secs < 10)
-                    lcd_putc('0');
-                lcd_puts(string);
+
             }
-            // Show tenths of a second on LCD screen
-            itoa(tenths, string, 10);  // Convert decimal value to string
-            // Display "00:00.tenths"
-            lcd_gotoxy(13, 0);
-            lcd_puts(string);
+
         }
+
+        else{}
+
         // Else do nothing and exit the ISR
+        itoa(ones, string, 10);
+        lcd_gotoxy(12, 0);
+        lcd_puts(string);
+        itoa(tens, string, 10);
+        lcd_gotoxy(11, 0);
+        lcd_puts(string);
+        itoa(hunds, string, 10);
+        lcd_gotoxy(10, 0);
+        lcd_puts(string);
+        itoa(thous, string, 10);
+        lcd_gotoxy(9, 0);
+        lcd_puts(string);
+        lcd_gotoxy(13, 0);
+        lcd_puts("   ");       
     }
 
+    
 
 }
+
 /*
 ISR(ADC_vect)
 {
     uint16_t value;
     uint16_t xval;
-
     char string[4];  // String for converted numbers by itoa()
-
     char string2[3];  // String for converted numbers by itoa()
-
     // Read converted value
     // Note that, register pair ADCH and ADCL can be read as a 16-bit value ADC
     value = ADC;
     // Convert "value" to "string" and display it 
-
     if (value <= 5)
     {
       xval--;
       lcd_gotoxy(0, 1);
       lcd_puts("Pressing left "); 
     }         
-
     else if (value >= 1000)
     {
       xval++;
       lcd_gotoxy(0, 1);
       lcd_puts("Pressing right"); 
     }
-
     lcd_gotoxy(xval, 0);
     lcd_puts("5");   
 }
