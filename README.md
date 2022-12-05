@@ -54,8 +54,7 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
 
 ## Foto
 
-![IMG_20221129_141155](https://user-images.githubusercontent.com/99417291/205460198-f538b051-a9f5-404d-ad78-56174f36f3a9.jpg)
-
+![Simulation](https://user-images.githubusercontent.com/99417291/205714912-33d9b55a-3286-4475-8e90-2705d894467f.jpg)
 
 ## References
 
