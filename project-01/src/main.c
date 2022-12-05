@@ -20,6 +20,11 @@
 #include <lcd.h>            // Peter Fleury's LCD library
 #include <stdlib.h>         // C library. Needed for number conversions
 
+/* Defining buttons and encoders ------------------------------------ */
+#define CLK PB4 // Encoder
+#define DT PB3  // Encoder
+#define SW PB2  // Button on encoder
+#define BTN PD2 // Button on joystick
 
 /* Function definitions ----------------------------------------------*/
 /**********************************************************************
@@ -30,17 +35,22 @@
  **********************************************************************/
 int main(void)
 {
+    GPIO_mode_input_pullup(&DDRB, CLK);
+    GPIO_mode_input_pullup(&DDRB, DT);
+
     // Initialize display
     lcd_init(LCD_DISP_ON);
-    lcd_gotoxy(0, 0); lcd_puts("Counter:");
-    lcd_gotoxy(0, 1); lcd_puts("Project_1");
-    lcd_gotoxy(9, 0); lcd_puts("0000");
+    lcd_gotoxy(0, 0); lcd_puts("Joystick: ");
+    lcd_gotoxy(0, 1); lcd_puts("Automatic:");    
+    lcd_gotoxy(11, 0); lcd_puts("0000");
+    lcd_gotoxy(11, 1); lcd_puts("0000");
 
     // Configure Analog-to-Digital Convertion unit
     // Select ADC voltage reference to "AVcc with external capacitor at AREF pin"
     ADMUX = ADMUX | (1<<REFS0);
     // Select input channel ADC0 (voltage divider pin)
-    ADMUX = ADMUX & ~(1<<MUX3 | 1<<MUX2 | 1<<MUX1 | 1<<MUX0);
+    ADMUX = ADMUX & ~(1<<MUX3 | 1<<MUX2 | 1<<MUX1 | 1<<MUX0);                       // ADC0
+    /*ADMUX = ADMUX & ~(1<<MUX3 | 1<<MUX2 | 1<<MUX1); ADMUX = ADMUX | (1<<MUX0);*/  // ADC1
     // Enable ADC module
     ADCSRA = ADCSRA | (1<<ADEN);
     // Enable conversion complete interrupt
@@ -71,7 +81,6 @@ int main(void)
 /* Interrupt service routines ----------------------------------------*/
 /**********************************************************************
  * Function: Timer/Counter1 overflow interrupt
- * Purpose:  Use single conversion mode and start conversion every 100 ms.
  **********************************************************************/
 ISR(TIMER1_OVF_vect)
 {
@@ -81,38 +90,78 @@ ISR(TIMER1_OVF_vect)
 
 /**********************************************************************
  * Function: ADC complete interrupt
- * Purpose:  Display converted value on LCD screen.
  **********************************************************************/
 
 ISR(ADC_vect)
 {
     static uint8_t no_of_overflows = 0;
-    static uint8_t ones = 0;  // Tenths of a second
-    static uint8_t tens = 0;    // Seconds
-    static uint8_t hunds = 0;    // Minutes
-    static uint8_t thous = 0;
+
+    // Values for Counter0
+    static uint8_t ones = 0;    // Ones
+    static uint8_t tens = 0;    // Tens
+    static uint8_t hunds = 0;   // Hundreds
+    static uint8_t thous = 0;   // Thousands
+
+    // Values for Counter1
+    static uint8_t ones1 = 0;    // Ones
+    static uint8_t tens1 = 0;    // Tens
+    static uint8_t hunds1 = 0;   // Hundreds
+    static uint8_t thous1 = 0;   // Thousands    
+
     char string[2];             // String for converted numbers by itoa()
-    uint16_t value = 0;
-    /*uint16_t xval = 0;*/
+    uint16_t value = 0;         // Value for ADC conversion
 
-    value = ADC;
+    int KY_BTN = GPIO_read(&PINB, SW);  // Encoder button
 
+    value = ADC;    // Value from joystick
 
     no_of_overflows++;
     if (no_of_overflows >= 6)
     {
-        // Do this every 6 x 16 ms = 100 ms
         no_of_overflows = 0;
 
+        /* Counter1 --------------------------------------------------------------------- */
+        if(KY_BTN == 0)     // If button is pressed, Counter1 stops
+        {}
+
+        else                // If button is released, Counter1 runs
+        {
+            ones1++;
+            if(ones1 > 9)
+            {
+                ones1 = 0;
+                tens1++;
+                if(tens1 > 9)
+                {
+                    tens1 = 0;
+                    hunds1++;
+                    if(hunds1 > 9)
+                    {
+                        hunds1 = 0;
+                        thous1++;
+                        if(thous1 > 9)
+                        {
+                            ones1 = 0;
+                            tens1 = 0;
+                            hunds1 = 0;
+                            thous1 = 0;
+                        }
+                    }
+                }
+            }
+        }
+        /* ------------------------------------------------------------------------------ */
+
+
+
+        /* Counter0 --------------------------------------------------------------------- */
+        // Counting UP
         if (value <= 300)
         {
-
-            // Count tenth of seconds 0, 1, ..., 9, 0, 1, ...
             ones++;
             if (ones > 9)
             {
-                ones = 0;
-                // Add seconds to stopwatch
+                ones = 0;                
                 tens++;
                 if (tens > 9)
                 {
@@ -124,32 +173,26 @@ ISR(ADC_vect)
                         hunds = 0;
                         thous++;
                     }
-
                 }
-
             }
-
         }
 
+        // Counting DOWN
         else if (value >= 700)
         {
             ones--;
-
             if (ones > 200)
             {
                 ones = 9;
                 tens--;
-
                 if (tens > 200)
                 {
                     tens = 9;
                     hunds--;
-
                     if (hunds > 200)
                     {
                         hunds = 9;
                         thous--;
-
                         if(thous > 200)
                         {
                             thous = 0;
@@ -158,60 +201,65 @@ ISR(ADC_vect)
                             ones = 0;
                         }
                     }
-
                 }
-
             }
-
         }
 
+        // Counting stopped
         else{}
+        /* ------------------------------------------------------------------------------ */
 
-        // Else do nothing and exit the ISR
+
+
+        /* Joystick button - RESET Counter1 --------------------------------------------- */
+        int JS_BTN = GPIO_read(&PIND,BTN);
+
+        if(JS_BTN == 0)
+        {
+            ones1 = 0;
+            tens1 = 0;
+            hunds1 = 0;
+            thous1 = 0;
+        }
+        else{}
+        /* ------------------------------------------------------------------------------ */
+
+
+
+        /* Converting values to string and displaying them ------------------------------ */
+        // Displaying Counter0
         itoa(ones, string, 10);
-        lcd_gotoxy(12, 0);
+        lcd_gotoxy(14, 0);
         lcd_puts(string);
         itoa(tens, string, 10);
-        lcd_gotoxy(11, 0);
+        lcd_gotoxy(13, 0);
         lcd_puts(string);
         itoa(hunds, string, 10);
-        lcd_gotoxy(10, 0);
+        lcd_gotoxy(12, 0);
         lcd_puts(string);
         itoa(thous, string, 10);
-        lcd_gotoxy(9, 0);
+        lcd_gotoxy(11, 0);
         lcd_puts(string);
-        lcd_gotoxy(13, 0);
-        lcd_puts("   ");       
+        lcd_gotoxy(15, 0);
+        lcd_puts(" ");
+
+        // Displaying Counter1
+        itoa(ones1, string, 10);
+        lcd_gotoxy(14, 1);
+        lcd_puts(string);
+        itoa(tens1, string, 10);
+        lcd_gotoxy(13, 1);
+        lcd_puts(string);
+        itoa(hunds1, string, 10);
+        lcd_gotoxy(12, 1);
+        lcd_puts(string);
+        itoa(thous1, string, 10);
+        lcd_gotoxy(11, 1);
+        lcd_puts(string);
+        lcd_gotoxy(15, 1);
+        lcd_puts(" ");
+        /* ------------------------------------------------------------------------------ */
+
     }
 
-    
-
 }
-
-/*
-ISR(ADC_vect)
-{
-    uint16_t value;
-    uint16_t xval;
-    char string[4];  // String for converted numbers by itoa()
-    char string2[3];  // String for converted numbers by itoa()
-    // Read converted value
-    // Note that, register pair ADCH and ADCL can be read as a 16-bit value ADC
-    value = ADC;
-    // Convert "value" to "string" and display it 
-    if (value <= 5)
-    {
-      xval--;
-      lcd_gotoxy(0, 1);
-      lcd_puts("Pressing left "); 
-    }         
-    else if (value >= 1000)
-    {
-      xval++;
-      lcd_gotoxy(0, 1);
-      lcd_puts("Pressing right"); 
-    }
-    lcd_gotoxy(xval, 0);
-    lcd_puts("5");   
-}
-*/
