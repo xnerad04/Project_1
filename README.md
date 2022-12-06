@@ -55,7 +55,7 @@ Put flowchats of your algorithm(s). Write descriptive text of your libraries and
 
 ## Video
 
-For more information, see the [contributor guide index](https://drive.google.com/file/d/1CWMb7DfZeLsw64z7y-cciqaf_-bbAd5J/view?usp=share_link).
+For video see: [Video presentation](https://drive.google.com/file/d/1CWMb7DfZeLsw64z7y-cciqaf_-bbAd5J/view?usp=share_link).
 
 ## References
 
