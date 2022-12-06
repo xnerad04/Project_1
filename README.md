@@ -53,9 +53,9 @@ As stated above, application consists of two counters.
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 
-## Foto
+## Video
 
-![Simulation](https://user-images.githubusercontent.com/99417291/205714912-33d9b55a-3286-4475-8e90-2705d894467f.jpg)
+For more information, see the [contributor guide index](https://drive.google.com/file/d/1CWMb7DfZeLsw64z7y-cciqaf_-bbAd5J/view?usp=share_link).
 
 ## References
 
