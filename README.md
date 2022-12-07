@@ -57,15 +57,15 @@ YOUR_PROJECT
 
 - lib             
   - gpio
-    - gpio.c
-    - gpio.h
+    - [gpio.c](https://github.com/xnerad04/Project_1/blob/main/project-01/lib/gpio/gpio.c)
+    - [gpio.h](https://github.com/xnerad04/Project_1/blob/main/project-01/lib/gpio/gpio.h)
   - lcd
-    - lcd.c
-    - lcd.h
-  - lcd_definitions.h
+    - [lcd.c](https://github.com/xnerad04/Project_1/blob/main/project-01/lib/lcd/lcd.c)
+    - [lcd.h](https://github.com/xnerad04/Project_1/blob/main/project-01/lib/lcd/lcd.h)
+    - [lcd_definitions.h](https://github.com/xnerad04/Project_1/blob/main/project-01/lib/lcd/lcd_definitions.h)
 
 - src           
-  - main.c
+  - [main.c](https://github.com/xnerad04/Project_1/blob/main/project-01/src/main.c)
 - README.md       
 
 ### Flowcharts
