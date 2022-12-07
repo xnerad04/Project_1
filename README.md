@@ -54,6 +54,7 @@ As stated above, application consists of two counters.
 YOUR_PROJECT        
 ├── include        
 │   └── [timer.h](https://github.com/xnerad04/Project_1/blob/main/project-01/include/timer.h)
+│
 ├── lib             
 │   └── gpio
 │        └── gpio.c
@@ -62,6 +63,7 @@ YOUR_PROJECT
 │        └── lcd.c
 │        └── lcd.h
 │        └── lcd_definitions.h
+│
 ├── src           
 │   └── main.c
 └── README.md       
