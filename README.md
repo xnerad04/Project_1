@@ -50,7 +50,7 @@ As stated above, application consists of two counters.
 * Manual counter: Position of joy-stick determines the direction of counting. When pushed to the right in direction of x-axis, counter starts counting up. When pushed to the left, it starts counting down. It is set to stop decrementing when reaching value of zero.
 * Automatic counter: Counting starts immediately. Counter automaticaly counts up. When pushed the button on rotary encoder, counting stops. To reset the counter, push the button on joy-stick.
 ### Flowchart
-
+#### adv
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 
 ## Video
