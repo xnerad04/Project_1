@@ -87,13 +87,10 @@ PROJECT_1
 #### Display values
 ![display](https://user-images.githubusercontent.com/99417291/206280259-6ce28f3e-b830-4681-95dc-dafe6d5ec4c4.jpg)
 
-## Simulation
-
-* [simulation](https://drive.google.com/file/d/1Q2TSgKQxPg-4rg3kyLVwANQnGo4HSZ4N/view?usp=sharing)
-
 ## Video
 
 * For video see: [video presentation](https://drive.google.com/file/d/1CWMb7DfZeLsw64z7y-cciqaf_-bbAd5J/view?usp=share_link).
+* For simulIde simulation see: [simulation](https://drive.google.com/file/d/1Q2TSgKQxPg-4rg3kyLVwANQnGo4HSZ4N/view?usp=share_link)
 
 ## References
 
