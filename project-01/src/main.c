@@ -172,6 +172,13 @@ ISR(ADC_vect)
                     {
                         hunds = 0;
                         thous++;
+                        if (thous > 9)
+                        {
+                            ones = 0;
+                            tens = 0;
+                            hunds = 0;
+                            thous = 0;
+                        }
                     }
                 }
             }
