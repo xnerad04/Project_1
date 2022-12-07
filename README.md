@@ -51,24 +51,22 @@ As stated above, application consists of two counters.
 * Automatic counter: Counting starts immediately. Counter automaticaly counts up. When pushed the button on rotary encoder, counting stops. To reset the counter, push the button on joy-stick.
 
 ### Project Structure
-``
 YOUR_PROJECT        
-├── include        
-│   └── [timer.h](https://github.com/xnerad04/Project_1/blob/main/project-01/include/timer.h)
-│
-├── lib             
-│   └── gpio
-│        └── gpio.c
-│        └── gpio.h
-│   └── lcd
-│        └── lcd.c
-│        └── lcd.h
-│        └── lcd_definitions.h
-│
-├── src           
-│   └── main.c
-└── README.md       
-``
+- include        
+  - [timer.h](https://github.com/xnerad04/Project_1/blob/main/project-01/include/timer.h)
+
+- lib             
+  - gpio
+    - gpio.c
+    - gpio.h
+  - lcd
+    - lcd.c
+    - lcd.h
+  - lcd_definitions.h
+
+- src           
+  - main.c
+- README.md       
 
 ### Flowcharts
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
