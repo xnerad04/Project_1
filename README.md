@@ -50,8 +50,21 @@ As stated above, application consists of two counters.
 * Manual counter: Position of joy-stick determines the direction of counting. When pushed to the right in direction of x-axis, counter starts counting up. When pushed to the left, it starts counting down. It is set to stop decrementing when reaching value of zero.
 * Automatic counter: Counting starts immediately. Counter automaticaly counts up. When pushed the button on rotary encoder, counting stops. To reset the counter, push the button on joy-stick.
 
-### Source codes
-
+### Project Structure
+YOUR_PROJECT        
+├── include        
+│   └── [timer.h](https://github.com/xnerad04/Project_1/blob/main/project-01/include/timer.h)
+├── lib             
+│   └── gpio
+│        └── gpio.c
+│        └── gpio.h
+│   └── lcd
+│        └── lcd.c
+│        └── lcd.h
+│        └── lcd_definitions.h
+├── src           
+│   └── main.c
+└── README.md       
 
 
 ### Flowcharts
