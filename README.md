@@ -71,7 +71,6 @@ PROJECT_1
 ---------------------------------------------------------------
 
 ### Flowcharts
-Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 
 #### ADC_vect
 ![adc](https://user-images.githubusercontent.com/99417291/206279790-4ba4b0f7-333a-4c79-bc20-40900500a751.jpg)
