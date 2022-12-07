@@ -1,6 +1,8 @@
-# Project - Selective timer
+# Project - Selective counter
 
 Application of analog joy-stick (2 ADC channels, 1 push button), rotary encoder, and Digilent PmodCLP LCD module.
+
+Our application consists of two separate counters - manual and automatic. The manual one is controlled by joy-stick component. The way you move the joy-stick determines direction of counting. The automatic one starts counting up immediately. You can stop the counting by pushing the button on encoder. By pushing the button on joy-stick, you resets the counter.
 
 ### Team members
 
@@ -43,13 +45,18 @@ To connect all components to the right pins, we use breadboard. Final connection
 
 
 ## Software description
+### Functions
+As stated above, application consists of two counters. 
+* Manual counter: Position of joy-stick determines the direction of counting. When pushed to the right in direction of x-axis, counter starts counting up. When pushed to the left, it starts counting down. It is set to stop decrementing when reaching value of zero.
+* Automatic counter: Counting starts immediately. Counter automaticaly counts up. When pushed the button on rotary encoder, counting stops. To reset the counter, push the button on joy-stick.
+### Flowchart
 
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
 
-## Foto
+## Video
 
-![IMG_20221129_141155](https://user-images.githubusercontent.com/99417291/205460198-f538b051-a9f5-404d-ad78-56174f36f3a9.jpg)
-
+* For video see: [video presentation](https://drive.google.com/file/d/1CWMb7DfZeLsw64z7y-cciqaf_-bbAd5J/view?usp=share_link).
+* For simulIde simulation see: [simulation](...).
 
 ## References
 
