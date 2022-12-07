@@ -49,9 +49,28 @@ To connect all components to the right pins, we use breadboard. Final connection
 As stated above, application consists of two counters. 
 * Manual counter: Position of joy-stick determines the direction of counting. When pushed to the right in direction of x-axis, counter starts counting up. When pushed to the left, it starts counting down. It is set to stop decrementing when reaching value of zero.
 * Automatic counter: Counting starts immediately. Counter automaticaly counts up. When pushed the button on rotary encoder, counting stops. To reset the counter, push the button on joy-stick.
-### Flowchart
-#### adv
+
+### Source codes
+
+
+
+### Flowcharts
 Put flowchats of your algorithm(s). Write descriptive text of your libraries and source files. Put direct links to these files in `src` or `lib` folders.
+
+#### ADC_vect
+![adc](https://user-images.githubusercontent.com/99417291/206279790-4ba4b0f7-333a-4c79-bc20-40900500a751.jpg)
+
+#### Counter_0 (Manual counter)
+![counter_0](https://user-images.githubusercontent.com/99417291/206279970-d2351319-19d3-40a7-97ea-6fabb8df4635.jpg)
+
+#### Counter_1 (Automatic counter)
+![counter_1](https://user-images.githubusercontent.com/99417291/206279994-457aca6c-2abd-41c8-a1ef-0bf598abcdf8.jpg)
+
+#### Reset Counter_1
+![reset](https://user-images.githubusercontent.com/99417291/206280024-fab43dd7-17b8-4d36-8758-679fbd59ef6f.jpg)
+
+#### Display values
+![display](https://user-images.githubusercontent.com/99417291/206280259-6ce28f3e-b830-4681-95dc-dafe6d5ec4c4.jpg)
 
 ## Video
 
