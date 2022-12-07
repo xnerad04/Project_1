@@ -90,7 +90,6 @@ PROJECT_1
 ## Video
 
 * For video see: [video presentation](https://drive.google.com/file/d/1CWMb7DfZeLsw64z7y-cciqaf_-bbAd5J/view?usp=share_link).
-* For simulIde simulation see: [simulation](...).
 
 ## References
 
